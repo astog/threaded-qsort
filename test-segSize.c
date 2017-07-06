@@ -144,7 +144,7 @@ int main(int argc, char const *argv[])
     data_file_fd = open("thsort_data.csv", O_WRONLY | O_TRUNC | O_CREAT, S_IRWXU | S_IRWXG);
     if (log_file_fd < 0)
     {
-        perror("Failed to open log file");
+        perror("Failed to open data file");
         exit(-1);
     }
 
