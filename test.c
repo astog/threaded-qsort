@@ -1,11 +1,9 @@
 #include "thsort.h"
 #include <stdio.h>
-#include <sys/types.h>
 #include <sys/time.h>
 #include <stdlib.h>
 #include <fcntl.h>
 #include <unistd.h>
-#include <limits.h>
 #include <float.h>
 #include <signal.h>
 #include <math.h>
@@ -51,8 +49,7 @@ double comp_time(struct timeval time_s, struct timeval time_e)
 
 double time_thsort(int ar_size, int seg_size)
 {
-    unsigned int i;
-    for (i = 0; i < ar_size; i++) {
+    for (int i = 0; i < ar_size; i++) {
         b[i] = a[i];
     }
 
@@ -70,8 +67,7 @@ double time_thsort(int ar_size, int seg_size)
 
 double time_quicksort(int ar_size)
 {
-    long i;
-    for (i = 0; i < ar_size; i++) {
+    for (int i = 0; i < ar_size; i++) {
         b[i] = a[i];
     }
 
@@ -101,14 +97,13 @@ void print_percent_bar(double percent_completed, int total_bars)
 
     int bars_to_print = ceil((total_bars / 100.0) * percent_completed);
     int bars_to_leave = total_bars - bars_to_print;
-    int i;
 
-    for (i = 0; i < bars_to_print; ++i)
+    for (int i = 0; i < bars_to_print; ++i)
     {
         fprintf(stderr, "=");
     }
 
-    for (i = 0; i < bars_to_leave; ++i)
+    for (int i = 0; i < bars_to_leave; ++i)
     {
         fprintf(stderr, " ");
     }
@@ -118,8 +113,7 @@ void print_percent_bar(double percent_completed, int total_bars)
 
 void clear_percent_bar(int total_bars)
 {
-    int i;
-    for (i = 0; i < total_bars + 17; ++i)
+    for (int i = 0; i < total_bars + 17; ++i)
     {
         fprintf(stderr, " ");
     }
@@ -161,8 +155,7 @@ int main(int argc, char const *argv[])
     double improvedby_sum = 0;
     int count = 0;
 
-    int ar_size;
-    for (ar_size = MIN_LENGTH; ar_size <= MAX_LENGTH; ar_size += AR_STEP_SIZE)
+    for (int ar_size = MIN_LENGTH; ar_size <= MAX_LENGTH; ar_size += AR_STEP_SIZE)
     {
         count++;
         printf("Calculating for ar_size =  %d\n", ar_size);
@@ -176,8 +169,7 @@ int main(int argc, char const *argv[])
         {
             // Calculate the average time
             long double timeSum = 0;
-            int j;
-            for (j = 0; j < N_AVG; ++j)
+            for (int j = 0; j < N_AVG; ++j)
             {
                 double t = time_thsort(ar_size, seg_size);
                 timeSum += t;
@@ -196,8 +188,7 @@ int main(int argc, char const *argv[])
 
         // Get time for quicksort
         long double timeSum = 0;
-        int j;
-        for (j = 0; j < N_AVG; ++j)
+        for (int j = 0; j < N_AVG; ++j)
         {
             double t = time_quicksort(ar_size);
             timeSum += t;
